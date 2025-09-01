@@ -3,7 +3,7 @@ FROM php:8.2-fpm
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
-    git unzip zip libzip-dev libpng-dev libonig-dev curl \
+    git unzip zip libzip-dev libpng-dev libonig-dev curl nginx \
     && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl gd
 
 # Instalacja Node.js i npm
@@ -22,11 +22,16 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm ci --only=production
 RUN npm run build
 
+# Kopiowanie konfiguracji Nginx
+COPY ./nginx/default.conf /etc/nginx/sites-available/default
+
 # Ustawienie uprawnień
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose port 8000 (Railway wymaga)
-EXPOSE 8000
+# Expose port 10000 (Render wymaga)
+EXPOSE 10000
 
-# Uruchomienie PHP-FPM
-CMD ["php-fpm"]
+# Start script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
