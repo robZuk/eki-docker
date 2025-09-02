@@ -19,7 +19,7 @@ COPY ./src /var/www/html
 RUN composer install --no-dev --optimize-autoloader
 
 # Instalacja zależności Node.js i build
-RUN npm ci --only=production
+RUN npm ci
 RUN npm run build
 
 # Kopiowanie konfiguracji Nginx
