@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Włącz debugowanie Laravel
+export APP_DEBUG=true
+
 # Start Nginx
 service nginx start
 
