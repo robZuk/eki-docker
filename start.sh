@@ -3,6 +3,17 @@
 # Włącz debugowanie Laravel
 export APP_DEBUG=true
 
+# Przejdź do katalogu aplikacji
+cd /var/www/html
+
+# Uruchom build CSS/JS
+npm run build
+
+# Wyczyść cache Laravel
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
 # Start Nginx
 service nginx start
 
