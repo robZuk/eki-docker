@@ -2,7 +2,7 @@ services:
   - type: web
     name: eki-laravel-app
     env: docker
-    dockerfilePath: ./php/Dockerfile
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     envVars:
       - key: APP_ENV
@@ -12,18 +12,14 @@ services:
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        value: eki-mysql
+        value: crossover.proxy.rlwy.net
+      - key: DB_PORT
+        value: 36170
       - key: DB_DATABASE
-        value: eki-robert
+        value: railway
       - key: DB_USERNAME
         value: root
       - key: DB_PASSWORD
-        value: root
+        value: WEcCBhysnTpwaIGbApKfLUddrUVSSCLP
     healthCheckPath: /
     autoDeploy: true
-
-databases:
-  - name: eki-mysql
-    databaseName: eki-robert
-    user: root
-    plan: free
