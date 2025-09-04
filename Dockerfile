@@ -19,8 +19,8 @@ COPY ./src /var/www/html
 RUN composer install --no-dev --optimize-autoloader
 
 # Instalacja zależności Node.js i build
-RUN npm ci
-RUN npm run build
+RUN npm ci --verbose
+RUN npm run build --verbose
 
 # Kopiowanie konfiguracji Nginx
 COPY ./nginx/default.conf /etc/nginx/sites-available/default
