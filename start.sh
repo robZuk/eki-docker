@@ -6,11 +6,18 @@ export APP_DEBUG=true
 # Przejdź do katalogu aplikacji
 cd /var/www/html
 
-# Wyczyść cache Laravel
+# Napraw uprawnienia do folderów storage
+chown -R www-data:www-data storage
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache
+
+# Uruchom migracje Laravel (jeśli baza jest dostępna)
+php artisan migrate --force || echo "Migracje nie mogły zostać uruchomione"
+
+# Wyczyść cache Laravel (tylko jeśli tabele istnieją)
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
-php artisan cache:clear
 
 # Wygeneruj komponenty Blade Icons
 php artisan icons:cache
